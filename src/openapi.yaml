@@ -1,11 +1,25 @@
 openapi: 3.0.1
 info:
   title: eventer web api
-  description: The api to retrieve events of saxony.
-  contact:
-    name: Danilo
-    email: danilo@eventer.app
+  description: |-
+    This is the official documentation of the (public) eventer web api, with which you can search and receive informations about events in Germany.<br /><br /><b>Note: Because this project is in beta stage the offered events are restricted to the Chemnitz area in Saxony / Germany.</b><br /><br />This API is used by [eventer.app](https://eventer.app), a mobile app to find local events.
+    ## Making a request
+    All URLs starts with `https://api.eventer.app/v1/`. The path is prefixed with the API version. If we change the API in backward-incompatible ways, we'll bump the version marker and maintain stable support for the old URLs.
+
+    Here's a simple example to search for upcoming "Party"-events:
+
+    [https://api.eventer.app/v1/events?search=Party](https://api.eventer.app/v1/events?search=Party)
+    ## Date formats
+    All timestamps (for requests and responses) are encoded in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with the following format: `YYYY-MM-DD'T'HH:mm'Z'`. The timezone used in responses is `UTC`.
+    ## Pagination and Limits
+    Most collection APIs paginate their results. Normally you can specify a limit with the parameter `limit` which must be greater than 0 and lower than 101 (default: 10). If there are more results to paginate for, you will get a `cursor` in the response which can be used as parameter for the next request (e.g. `&cursor=foo`), and so on until you get a response without cursor.
+    ## Authentication
+    This is an open API without authentication.
+    ## Help us make it better
+    Please tell us how we can make the API better. If you have a specific feature request or if you found a bug, please feel free to contact us.
   version: "1.0"
+externalDocs:
+  description: external doc comes here
 servers:
 - url: https://api.eventer.app/v1/
   variables: {}
@@ -13,9 +27,10 @@ paths:
   /events/{id}:
     get:
       tags:
-      - Events
+      - /events
+      summary: events/{id}
       description: Retrieve an event by its id.
-      operationId: get by id
+      operationId: getById
       parameters:
       - name: id
         in: path
@@ -31,9 +46,11 @@ paths:
   /events:
     get:
       tags:
-      - Events
-      description: Find events by search.
-      operationId: search (GET shortcut)
+      - /events
+      summary: /events/
+      description: Use this endpoint to search for events.<br /><br />All returned
+        events will be primarily sorted by ```event.starts_at``` timestamps.
+      operationId: search_get
       parameters:
       - name: search
         in: query
@@ -97,9 +114,11 @@ paths:
                 $ref: '#/components/schemas/SearchEventsResponse'
     post:
       tags:
-      - Events
-      description: Find events by search.
-      operationId: search
+      - /events
+      summary: /events/
+      description: Use this endpoint to search for events.<br /><br />All returned
+        events will be primarily sorted by ```event.starts_at``` timestamps.
+      operationId: search_post
       requestBody:
         content:
           application/json; charset="utf-8":
@@ -112,10 +131,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchEventsResponse'
+  /places/{id}:
+    get:
+      tags:
+      - /places
+      operationId: getById_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json; charset="utf-8": {}
   /places:
     get:
       tags:
-      - Places
+      - /places
       operationId: byGooglePlaceIds_get
       parameters:
       - name: google_place_ids
@@ -131,7 +166,7 @@ paths:
                 $ref: '#/components/schemas/GetPlacesResponse'
     post:
       tags:
-      - Places
+      - /places
       operationId: byGooglePlaceIds_post
       requestBody:
         content:
@@ -145,22 +180,6 @@ paths:
             application/json; charset="utf-8":
               schema:
                 $ref: '#/components/schemas/GetPlacesResponse'
-  /places/{id}:
-    get:
-      tags:
-      - Places
-      operationId: getById
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/json; charset="utf-8": {}
   /application.wadl:
     get:
       operationId: getWadl

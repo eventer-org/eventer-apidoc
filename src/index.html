@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>eventer :: web api documentation</title>
+    <title>eventer.app - web api documentation</title>
+    <meta name="description" content="The documentation of the (public) eventer web api.">
+    <meta name="keywords" content="event, api, eventer, eventer.app, saxony, openapi, rest, documentation">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,14 +19,21 @@
   </head>
   <body>
     
-    <redoc spec-url='openapi.yaml'></redoc>
-    <!--<redoc spec-url='http://localhost:8888/v1/openapi.yaml'></redoc>-->
-
     <!-- see: https://github.com/Rebilly/ReDoc#redoc-options-object -->
-    <script
-      hideLoading="true"
-      sortPropsAlphabetically="true"
-      src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js">
+    <redoc
+      hideLoading="true" 
+      sortPropsAlphabetically="true" 
+      spec-url='openapi.yaml'
+    >
+    </redoc>
+    <!--<redoc
+      hideLoading="true" 
+      sortPropsAlphabetically="true" 
+      spec-url='http://localhost:8888/v1/openapi.yaml'
+    >
+    </redoc>-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js">
     </script>
   </body>
 </html>
