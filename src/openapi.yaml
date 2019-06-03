@@ -14,7 +14,7 @@ info:
     ## Pagination and Limits
     Most collection APIs paginate their results. Normally you can specify a limit with the parameter `limit` which must be greater than 0 and lower than 101 (default: 10). If there are more results to paginate for, you will get a `cursor` in the response which can be used as parameter for the next request (e.g. `&cursor=foo`), and so on until you get a response without cursor.
     ## Authentication
-    This is an open API without authentication.
+    This is an open API, no authentication needed.
     ## Help us make it better
     Please tell us how we can make the API better. If you have a specific feature request or if you found a bug, please feel free to contact us.
   version: "1.0"
@@ -29,20 +29,27 @@ paths:
       tags:
       - /events
       summary: events/{id}
-      description: Retrieve an event by its id.
+      description: Retrieve an event by id.
       operationId: getById
       parameters:
       - name: id
         in: path
+        description: The id of the event to get.
         required: true
         schema:
           type: integer
           format: int64
+          example: 6171211574804480
+        example: 6171211574804480
       responses:
-        default:
-          description: default response
+        200:
+          description: The event.
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiEvent'
+        404:
+          description: Event not found.
   /events:
     get:
       tags:
@@ -54,20 +61,39 @@ paths:
       parameters:
       - name: search
         in: query
+        description: Searches events by a free text search.
         schema:
           type: string
+          format: string
+          example: Party
+        example: Party
       - name: starts_at_min
         in: query
+        description: The minimum starts-at timestamp for events. If not given the
+          default value will be now.
         schema:
           type: string
+          format: date-time
+          example: 2018-01-20T16:00:00.000Z
+        example: 2018-01-20T16:00:00.000Z
       - name: starts_at_max
         in: query
+        description: The maximum starts-at timestamp for events.
         schema:
           type: string
+          format: date-time
+          example: 2018-01-20T22:00:00.000Z
+        example: 2018-01-20T22:00:00.000Z
       - name: categories
         in: query
+        description: 'A comma separated list of event categories to search for (not
+          all events are categorized yet). If not specified all events of all categories
+          (or without category) will be returned.<br/><br/>Currently the following
+          categories are supported: <br/>`exhibition`, `meetup`, `movie`'
         schema:
           type: string
+          example: meetup
+        example: meetup,movie
       - name: google_place_ids
         in: query
         schema:
@@ -120,6 +146,7 @@ paths:
         events will be primarily sorted by ```event.starts_at``` timestamps.
       operationId: search_post
       requestBody:
+        description: Defines search parameters to find events.
         content:
           application/json; charset="utf-8":
             schema:
@@ -180,29 +207,6 @@ paths:
             application/json; charset="utf-8":
               schema:
                 $ref: '#/components/schemas/GetPlacesResponse'
-  /application.wadl:
-    get:
-      operationId: getWadl
-      responses:
-        default:
-          description: default response
-          content:
-            application/vnd.sun.wadl+xml: {}
-            application/xml: {}
-  /application.wadl/{path}:
-    get:
-      operationId: getExternalGrammar
-      parameters:
-      - name: path
-        in: path
-        required: true
-        schema:
-          type: string
-      responses:
-        default:
-          description: default response
-          content:
-            application/xml: {}
 components:
   schemas:
     ApiEvent:
