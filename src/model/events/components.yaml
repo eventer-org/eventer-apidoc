@@ -52,16 +52,16 @@ components:
       type: object
       properties:
         search:
+          description: Searches events by a free text search.
           type: string
-        limit:
-          type: integer
-          format: int32
-        cursor:
-          type: string
+          example: Party
         starts_at_min:
+          description: The minimum starts-at timestamp for events. If not given the
+            default value will be now.
           type: string
           format: date-time
         starts_at_max:
+          description: The maximum starts-at timestamp for events.
           type: string
           format: date-time
         categories:
@@ -72,10 +72,16 @@ components:
           type: array
           items:
             type: string
+            example: movie
         google_place_ids:
+          description: 'A comma separated list of ids of google places to restrict search to events from these places only.
+            <br/>You can use the google maps api to search for google place ids: 
+            [google place id finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)'
           type: array
           items:
             type: string
+            example: ChIJQ7SzNXtGp0cRZwiPGboZQJo
+          style: simple
         geo_area:
           $ref: '#/components/schemas/GeoArea'
         geo_raster_points:
@@ -89,11 +95,16 @@ components:
           type: array
           items:
             type: string
-        include:
-          $ref: '#/components/schemas/DiscoverRequestIncludeType'
         updated_since:
           type: string
           format: date-time
+        include:
+          $ref: '#/components/schemas/DiscoverRequestIncludeType'
+        limit:
+          type: integer
+          format: int32
+        cursor:
+          type: string
     DiscoverRequestIncludeType:
       type: object
       properties:

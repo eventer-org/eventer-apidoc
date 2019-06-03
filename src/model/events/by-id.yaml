@@ -1,19 +1,19 @@
 get:
   tags:
-    - /events
-  summary: events/{id}
+  - /events
+  summary: get event by id
   description: Retrieve an event by id.
-  operationId: getById
+  operationId: get-event-by-id
   parameters:
-    - name: id
-      in: path
-      description: The id of the event to get.
-      required: true
-      schema:
-        type: integer
-        format: int64
-        example: 6171211574804480
+  - name: id
+    in: path
+    description: The id of the event to get.
+    required: true
+    schema:
+      type: integer
+      format: int64
       example: 6171211574804480
+    example: 6171211574804480
   responses:
     200:
       description: The event.

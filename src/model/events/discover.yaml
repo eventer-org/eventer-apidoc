@@ -1,10 +1,10 @@
-scget:
+get:
   tags:
-    - /events
-  summary: /events/
+  - /events
+  summary: search events
   description: Use this endpoint to search for events.<br /><br />All returned
     events will be primarily sorted by `event.starts_at` timestamps.
-  operationId: search_get
+  operationId: discover-events-get
   parameters:
   - name: search
     in: query
@@ -12,7 +12,7 @@ scget:
     schema:
       type: string
       format: string
-      example: Party
+    required: false
     example: Party
   - name: starts_at_min
     in: query
@@ -21,16 +21,13 @@ scget:
     schema:
       type: string
       format: date-time
-      example: 2018-01-20T16:00:00.000Z
-    example: 2018-01-20T16:00:00.000Z
+    required: false
   - name: starts_at_max
     in: query
     description: The maximum starts-at timestamp for events.
     schema:
       type: string
       format: date-time
-      example: 2018-01-20T22:00:00.000Z
-    example: 2018-01-20T22:00:00.000Z
   - name: categories
     in: query
     description: 'A comma separated list of event categories to search for (not
@@ -43,8 +40,14 @@ scget:
     example: meetup,movie
   - name: google_place_ids
     in: query
+    description: 'A comma separated list of ids of google places to restrict search to events from these places only.
+      <br/>You can use the google maps api to search for google place ids: 
+      [google place id finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)'
     schema:
-      type: string
+      type: array
+      items:
+        type: string
+    style: simple
   - name: geo_area
     in: query
     schema:
@@ -65,16 +68,16 @@ scget:
     in: query
     schema:
       type: string
+  - name: updated_since
+    in: query
+    schema:
+      type: string
   - name: limit
     in: query
     schema:
       type: integer
       format: int32
   - name: cursor
-    in: query
-    schema:
-      type: string
-  - name: updated_since
     in: query
     schema:
       type: string
@@ -88,10 +91,10 @@ scget:
 post:
   tags:
   - /events
-  summary: /events/
+  summary: search events
   description: Use this endpoint to search for events.<br /><br />All returned
     events will be primarily sorted by `event.starts_at` timestamps.
-  operationId: search_post
+  operationId: discover-events-post
   requestBody:
     description: Defines search parameters to find events.
     content:
