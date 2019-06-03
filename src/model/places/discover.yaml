@@ -1,0 +1,32 @@
+get:
+  tags:
+    - /places
+  operationId: byGooglePlaceIds_get
+  parameters:
+    - name: google_place_ids
+      in: query
+      schema:
+        type: string
+  responses:
+    default:
+      description: default response
+      content:
+        application/json; charset="utf-8":
+          schema:
+            $ref: './components.yaml#/components/schemas/DiscoverResponse'
+post:
+  tags:
+    - /places
+  operationId: byGooglePlaceIds_post
+  requestBody:
+    content:
+      application/json; charset="utf-8":
+        schema:
+          $ref: './components.yaml#/components/schemas/DiscoverRequest'
+  responses:
+    default:
+      description: default response
+      content:
+        application/json; charset="utf-8":
+          schema:
+            $ref: './components.yaml#/components/schemas/DiscoverResponse'

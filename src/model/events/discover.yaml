@@ -1,0 +1,107 @@
+scget:
+  tags:
+    - /events
+  summary: /events/
+  description: Use this endpoint to search for events.<br /><br />All returned
+    events will be primarily sorted by `event.starts_at` timestamps.
+  operationId: search_get
+  parameters:
+  - name: search
+    in: query
+    description: Searches events by a free text search.
+    schema:
+      type: string
+      format: string
+      example: Party
+    example: Party
+  - name: starts_at_min
+    in: query
+    description: The minimum starts-at timestamp for events. If not given the
+      default value will be now.
+    schema:
+      type: string
+      format: date-time
+      example: 2018-01-20T16:00:00.000Z
+    example: 2018-01-20T16:00:00.000Z
+  - name: starts_at_max
+    in: query
+    description: The maximum starts-at timestamp for events.
+    schema:
+      type: string
+      format: date-time
+      example: 2018-01-20T22:00:00.000Z
+    example: 2018-01-20T22:00:00.000Z
+  - name: categories
+    in: query
+    description: 'A comma separated list of event categories to search for (not
+      all events are categorized yet). If not specified all events of all categories
+      (or without category) will be returned.<br/><br/>Currently the following
+      categories are supported: <br/>`exhibition`, `meetup`, `movie`'
+    schema:
+      type: string
+      example: meetup
+    example: meetup,movie
+  - name: google_place_ids
+    in: query
+    schema:
+      type: string
+  - name: geo_area
+    in: query
+    schema:
+      type: string
+  - name: geo_raster_points
+    in: query
+    schema:
+      type: string
+  - name: contexts
+    in: query
+    schema:
+      type: string
+  - name: include_deleted
+    in: query
+    schema:
+      type: string
+  - name: include_places
+    in: query
+    schema:
+      type: string
+  - name: limit
+    in: query
+    schema:
+      type: integer
+      format: int32
+  - name: cursor
+    in: query
+    schema:
+      type: string
+  - name: updated_since
+    in: query
+    schema:
+      type: string
+  responses:
+    default:
+      description: default response
+      content:
+        application/json:
+          schema:
+            $ref: './components.yaml#/components/schemas/DiscoverResponse'
+post:
+  tags:
+  - /events
+  summary: /events/
+  description: Use this endpoint to search for events.<br /><br />All returned
+    events will be primarily sorted by `event.starts_at` timestamps.
+  operationId: search_post
+  requestBody:
+    description: Defines search parameters to find events.
+    content:
+      application/json; charset="utf-8":
+        schema:
+          $ref: './components.yaml#/components/schemas/DiscoverRequest'
+  responses:
+    default:
+      description: default response
+      content:
+        application/json:
+          schema:
+            $ref: './components.yaml#/components/schemas/DiscoverResponse'

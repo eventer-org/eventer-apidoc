@@ -1,0 +1,15 @@
+get:
+  tags:
+    - /places
+  operationId: getById_1
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    default:
+      description: default response
+      content:
+        application/json; charset="utf-8": {}

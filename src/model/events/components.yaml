@@ -1,0 +1,123 @@
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+        categories:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        link:
+          type: string
+        contexts:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+        google_place_id:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+        starts_at:
+          type: string
+          format: date-time
+    GeoArea:
+      type: object
+      properties:
+        bottom:
+          type: number
+          format: double
+        top:
+          type: number
+          format: double
+        right:
+          type: number
+          format: double
+        left:
+          type: number
+          format: double
+    DiscoverRequest:
+      type: object
+      properties:
+        search:
+          type: string
+        limit:
+          type: integer
+          format: int32
+        cursor:
+          type: string
+        starts_at_min:
+          type: string
+          format: date-time
+        starts_at_max:
+          type: string
+          format: date-time
+        categories:
+          description: 'A comma separated list of event categories to search for (not
+            all events are categorized yet). If not specified all events of all categories
+            (or without category) will be returned.<br/><br/>Currently the following
+            categories are supported: <br/>`exhibition`, `meetup`, `movie`'
+          type: array
+          items:
+            type: string
+        google_place_ids:
+          type: array
+          items:
+            type: string
+        geo_area:
+          $ref: '#/components/schemas/GeoArea'
+        geo_raster_points:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+              format: double
+        contexts:
+          type: array
+          items:
+            type: string
+        include:
+          $ref: '#/components/schemas/DiscoverRequestIncludeType'
+        updated_since:
+          type: string
+          format: date-time
+    DiscoverRequestIncludeType:
+      type: object
+      properties:
+        places:
+          type: object
+    DiscoverResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        places:
+          type: object
+          additionalProperties:
+            $ref: '../places/components.yaml#/components/schemas/Place'
+        cursor:
+          type: string
+        request:
+          $ref: '#/components/schemas/DiscoverRequest'
+        timestamp:
+          type: string
+          format: date-time
+        primary_google_place_ids:
+          type: object
+          additionalProperties:
+            type: string
