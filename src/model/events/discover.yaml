@@ -17,8 +17,8 @@ get:
     example: Party
   - name: starts_at_min
     in: query
-    description: The minimum starts-at timestamp for events. If not given the
-      default value will be now.
+    description: 'The minimum starts-at timestamp for events. If not given the
+      default value will be `now`.'
     schema:
       type: string
       format: date-time
@@ -63,9 +63,15 @@ get:
     required: false
     example: 50.838948,12.912577,50.827132,12.933774
   - name: geo_raster_points
+    description: 'Restricts the event search to a geo areas specified by "raster points". 
+      A raster point is a latitude/longitude combination of double values rounded off to 1 decimal point 
+      (separated by a semicolon). For example the "raster point" `50.8;12.9` restricts events
+      to locations within a latitude starting with `50.8` and longitude starting with `12.9`.'
     in: query
     schema:
       type: string
+    required: false
+    example: 50.8,12.9;50.9,12.9
   - name: contexts
     in: query
     schema:

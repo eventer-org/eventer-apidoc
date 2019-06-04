@@ -66,19 +66,16 @@ components:
         search:
           description: Searches events by a free text search.
           type: string
-          required: false
           example: Party
         starts_at_min:
-          description: The minimum starts-at timestamp for events. If not given the
-            default value will be now.
+          description: 'The minimum starts-at timestamp for events. If not given the
+            default value will be `now`.'
           type: string
           format: date-time
-          required: false
         starts_at_max:
           description: The maximum starts-at timestamp for events.
           type: string
           format: date-time
-          required: false
         categories:
           description: 'A comma separated list of event categories to search for (not
             all events are categorized yet). If not specified all events of all categories
@@ -87,7 +84,6 @@ components:
           type: array
           items:
             type: string
-          required: false
           example: [meetup, movie]
         google_place_ids:
           description: 'A comma separated list of ids of google places to restrict search to events from these places only.
@@ -98,18 +94,20 @@ components:
             type: string
             example: ChIJQ7SzNXtGp0cRZwiPGboZQJo
           style: simple
-          required: false
         geo_area:
           description: 'Restricts the event search to a geo area bounding box specified by 4 comma separated coordinates:
             top (latitude), left (longitude), bottom (latitude) and right (longitude).'
           $ref: '#/components/schemas/GeoArea'
         geo_raster_points:
+          description: 'Restricts the event search to a geo areas specified by "raster points". 
+            A raster point is a latitude/longitude combination of double values rounded off to 1 decimal point 
+            (separated by a semicolon). For example the "raster point" `50.8;12.9` restricts events
+            to locations within a latitude starting with `50.8` and longitude starting with `12.9`.'
           type: array
           items:
             type: array
-            items:
-              type: number
-              format: double
+            format: double
+          example: [[50.8, 12.9], [50.9, 12.9]]
         contexts:
           type: array
           items:
