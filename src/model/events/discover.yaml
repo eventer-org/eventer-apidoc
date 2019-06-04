@@ -82,6 +82,14 @@ get:
     style: simple
     required: false
     example: "meetup/groups/29602718,meetup/groups/29002800"
+  - name: updated_since
+    in: query
+    description: 'If set only events will be returned which has been added or 
+      modified since the given timestamp. Can be used for synchronization or fetch scenarios.'
+    schema:
+      type: string
+      format: date-time
+    required: false
   - name: include_deleted
     in: query
     schema:
@@ -90,22 +98,27 @@ get:
     in: query
     schema:
       type: string
-  - name: updated_since
-    in: query
-    schema:
-      type: string
   - name: limit
     in: query
+    description: 'Sets the limit how much events should be returned by the response. 
+      Limit must be greater than 0 and lower than 101. If not set the default limit will be 10.'
     schema:
       type: integer
       format: int32
+    required: false
+    example: 10
   - name: cursor
     in: query
+    description: 'Continues a search by an "offset" specified by this cursor. 
+      Any event search could return a cursor which represents an offset to paginate to the next events. 
+      To use a cursor you have to re-run the request with same parameters again but with the given cursor
+      value to retrieve the next events of your search behind the limit.'
     schema:
       type: string
+    required: false
   responses:
-    default:
-      description: default response
+    200:
+      description: All events that match the specified search criterias.
       content:
         application/json:
           schema:
@@ -124,8 +137,8 @@ post:
         schema:
           $ref: './components.yaml#/components/schemas/DiscoverRequest'
   responses:
-    default:
-      description: default response
+    200:
+      description: All events that match the specified search criterias.
       content:
         application/json:
           schema:

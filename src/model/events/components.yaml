@@ -117,15 +117,24 @@ components:
             type: string
           example: ["meetup/groups/29602718", "meetup/groups/29002800"]
         updated_since:
+          description: 'If set only events will be returned which has been added or 
+            modified since the given timestamp. Can be used for synchronization or fetch scenarios.'
           type: string
           format: date-time
         include:
           $ref: '#/components/schemas/DiscoverRequestIncludeType'
         limit:
+          description: 'Sets the limit how much events should be returned by the response. 
+            Limit must be greater than 0 and lower than 101. If not set the default limit will be 10.'
           type: integer
           format: int32
+          example: 10
         cursor:
-          type: string
+          description: 'Continues a search by an "offset" specified by this cursor. 
+            Any event search could return a cursor which represents an offset to paginate to the next events. 
+            To use a cursor you have to re-run the request with same parameters again but with the given cursor
+            value to retrieve the next events of your search behind the limit.'
+          type: starting
     DiscoverRequestIncludeType:
       type: object
       properties:
@@ -144,6 +153,7 @@ components:
             $ref: '../places/components.yaml#/components/schemas/Place'
         cursor:
           type: string
+          example: WzE1NTk2NjU4MDAsImV2ZW50IzUxODQ0OTU2MTk2NzAwMTYiXQ==
         request:
           $ref: '#/components/schemas/DiscoverRequest'
         timestamp:
