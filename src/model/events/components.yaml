@@ -109,9 +109,13 @@ components:
             format: double
           example: [[50.8, 12.9], [50.9, 12.9]]
         contexts:
+          description: 'Events may assigned to different contexts to determine where they come from.
+            For example a facebook event has the following contexts: `facebook`, `facebook/pages/{pageId}` and `facebook/events/{eventId}`.
+            <br /><br />So you can search for all events related to a context (e.g. all events of a facebook page).'
           type: array
           items:
             type: string
+          example: ["meetup/groups/29602718", "meetup/groups/29002800"]
         updated_since:
           type: string
           format: date-time

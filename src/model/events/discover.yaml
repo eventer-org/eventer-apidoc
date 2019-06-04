@@ -74,8 +74,14 @@ get:
     example: 50.8,12.9;50.9,12.9
   - name: contexts
     in: query
+    description: 'Events may assigned to different contexts to determine where they come from.
+      For example a facebook event has the following contexts: `facebook`, `facebook/pages/{pageId}` and `facebook/events/{eventId}`.
+      <br /><br />So you can search for all events related to a context (e.g. all events of a facebook page).'
     schema:
       type: string
+    style: simple
+    required: false
+    example: "meetup/groups/29602718,meetup/groups/29002800"
   - name: include_deleted
     in: query
     schema:
