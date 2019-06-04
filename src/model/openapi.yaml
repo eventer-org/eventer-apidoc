@@ -7,7 +7,7 @@ info:
     This is the official documentation of the (public) eventer web api, with which you can search and receive informations about events in Germany.<br /><br /><b>Note: Because this project is in beta stage the offered events are restricted to the Chemnitz area in Saxony / Germany.</b><br /><br />This API is used by [eventer.app](https://eventer.app), a mobile app to find local events.
     ## Making a request
     All URLs starts with `https://api.eventer.app/v1/`. The path is prefixed with the API version. If we change the API in backward-incompatible ways, we'll bump the version marker and maintain stable support for the old URLs.
-    Here's a simple example to search for upcoming "Party"-events:
+    Here's a simple example to search for upcoming "Party" events:
     [https://api.eventer.app/v1/events?search=Party](https://api.eventer.app/v1/events?search=Party)
     ## Date formats
     All timestamps (for requests and responses) are encoded in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with the following format: `YYYY-MM-DD'T'HH:mm'Z'`. The timezone used in responses is `UTC`.

@@ -37,33 +37,48 @@ components:
       type: object
       properties:
         bottom:
+          description: 'The bottom (latitude) of the geo bounding rectangle.'
           type: number
           format: double
+          required: true
+          example: 50.827132
         top:
+          description: 'The top (latitude) of the geo bounding rectangle.'
           type: number
           format: double
+          required: true
+          example: 50.838948
         right:
+          description: 'The right (longitude) of the geo bounding rectangle.'
           type: number
           format: double
+          required: true
+          example: 12.933774
         left:
+          description: 'The left (longitude) of the geo bounding rectangle.'
           type: number
           format: double
+          required: true
+          example: 12.912577
     DiscoverRequest:
       type: object
       properties:
         search:
           description: Searches events by a free text search.
           type: string
+          required: false
           example: Party
         starts_at_min:
           description: The minimum starts-at timestamp for events. If not given the
             default value will be now.
           type: string
           format: date-time
+          required: false
         starts_at_max:
           description: The maximum starts-at timestamp for events.
           type: string
           format: date-time
+          required: false
         categories:
           description: 'A comma separated list of event categories to search for (not
             all events are categorized yet). If not specified all events of all categories
@@ -72,7 +87,8 @@ components:
           type: array
           items:
             type: string
-            example: movie
+          required: false
+          example: [meetup, movie]
         google_place_ids:
           description: 'A comma separated list of ids of google places to restrict search to events from these places only.
             <br/>You can use the google maps api to search for google place ids: 
@@ -82,7 +98,10 @@ components:
             type: string
             example: ChIJQ7SzNXtGp0cRZwiPGboZQJo
           style: simple
+          required: false
         geo_area:
+          description: 'Restricts the event search to a geo area bounding box specified by 4 comma separated coordinates:
+            top (latitude), left (longitude), bottom (latitude) and right (longitude).'
           $ref: '#/components/schemas/GeoArea'
         geo_raster_points:
           type: array

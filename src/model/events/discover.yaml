@@ -2,8 +2,9 @@ get:
   tags:
   - /events
   summary: search events
-  description: Use this endpoint to search for events.<br /><br />All returned
-    events will be primarily sorted by `event.starts_at` timestamps.
+  description: Use this endpoint to search for events.
+    <br /><br />All returned events will be primarily sorted by `event.starts_at` timestamps.
+    This is a shortcut for `POST /events` request.
   operationId: discover-events-get
   parameters:
   - name: search
@@ -28,6 +29,7 @@ get:
     schema:
       type: string
       format: date-time
+    required: false
   - name: categories
     in: query
     description: 'A comma separated list of event categories to search for (not
@@ -37,6 +39,7 @@ get:
     schema:
       type: string
       example: meetup
+    required: false
     example: meetup,movie
   - name: google_place_ids
     in: query
@@ -48,10 +51,17 @@ get:
       items:
         type: string
     style: simple
+    required: false
   - name: geo_area
     in: query
+    description: 'Restricts the event search to a geo area bounding box specified by 4 comma separated coordinates: 
+      top (latitude), left (longitude), bottom (latitude) and right (longitude), in this order.'
     schema:
-      type: string
+      type: array
+      items:
+        type: double
+    required: false
+    example: 50.838948,12.912577,50.827132,12.933774
   - name: geo_raster_points
     in: query
     schema:
