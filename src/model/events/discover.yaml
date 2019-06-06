@@ -1,11 +1,11 @@
 get:
   tags:
   - /events
+  operationId: discover-events-get
   summary: search events
   description: Use this endpoint to search for events.
     <br /><br />All returned events will be primarily sorted by `event.starts_at` timestamps.
     This is a shortcut for `POST /events` request.
-  operationId: discover-events-get
   parameters:
   - name: search
     in: query
@@ -133,9 +133,9 @@ post:
   tags:
   - /events
   summary: search events
+  operationId: discover-events-post
   description: Use this endpoint to search for events.<br /><br />All returned
     events will be primarily sorted by `event.starts_at` timestamps.
-  operationId: discover-events-post
   requestBody:
     description: Defines search parameters to find events.
     content:

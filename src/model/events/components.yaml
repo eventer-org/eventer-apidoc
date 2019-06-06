@@ -110,7 +110,6 @@ components:
           items:
             type: string
             example: ChIJQ7SzNXtGp0cRZwiPGboZQJo
-          style: simple
         geo_area:
           description: 'Restricts the event search to a geo area bounding box specified by 4 comma separated coordinates:
             top (latitude), left (longitude), bottom (latitude) and right (longitude).'
@@ -190,7 +189,6 @@ components:
           type: string
           example: WzE1NTk2NjU4MDAsImV2ZW50IzUxODQ0OTU2MTk2NzAwMTYiXQ==
         request:
-          description: 'The original request parameter values, which have been used to perfom this event search.'
           $ref: '#/components/schemas/DiscoverRequest'
         timestamp:
           description: 'The timestamp, when this request has been executed.
