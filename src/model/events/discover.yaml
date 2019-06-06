@@ -45,7 +45,7 @@ get:
     in: query
     description: 'A comma separated list of ids of google places to restrict search to events from these places only.
       <br/>You can use the google maps api to search for google place ids: 
-      [google place id finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)'
+      [google place id finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder).'
     schema:
       type: array
       items:
@@ -84,7 +84,7 @@ get:
     example: "meetup/groups/29602718,meetup/groups/29002800"
   - name: updated_since
     in: query
-    description: 'If set only events will be returned which has been added or 
+    description: 'If set, only events will be returned which has been added or 
       modified since the given timestamp. Can be used for synchronization or fetch scenarios.'
     schema:
       type: string
@@ -92,12 +92,18 @@ get:
     required: false
   - name: include_deleted
     in: query
+    description: 'If set to `true`the response will also include events which have been deleted 
+        (since the last update timestamp). This option can be used for synchronization to get information about deleted events.'
     schema:
-      type: string
+      type: boolean
+    required: false
   - name: include_places
     in: query
+    description: 'If set to `true` the response will also include the field places which holds
+      all places of the fetched events by their id. So you can use one request to fetch events with the places where they take part.'
     schema:
-      type: string
+      type: boolean
+    required: false
   - name: limit
     in: query
     description: 'Sets the limit how much events should be returned by the response. 
@@ -109,7 +115,7 @@ get:
     example: 10
   - name: cursor
     in: query
-    description: 'Continues a search by an "offset" specified by this cursor. 
+    description: 'Continues a search by an `offset` specified by this cursor. 
       Any event search could return a cursor which represents an offset to paginate to the next events. 
       To use a cursor you have to re-run the request with same parameters again but with the given cursor
       value to retrieve the next events of your search behind the limit.'

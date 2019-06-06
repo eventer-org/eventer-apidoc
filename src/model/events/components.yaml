@@ -4,33 +4,50 @@ components:
       type: object
       properties:
         id:
+          description: 'The id of the event.'
           type: integer
           format: int64
+          readOnly: true
         title:
+          description: 'The short title of the event'
           type: string
+          example: K-Pop-Party
+        starts_at:
+          description: 'The time when this event will start.'
+          type: string
+          format: date-time
         description:
+          description: 'A description of the event.'
           type: string
         categories:
+          description: 'The categories to which the event belongs. Note: not all events are categorized, yet.'
           uniqueItems: true
           type: array
           items:
             type: string
+          example: [meetup, movie]
         link:
+          description: 'The link to the original website of this event.'
           type: string
+          example: 'https://www.meetup.com/dresden-eating-drinking-talking-laughing-etc-meetup/events/261999037/'
         contexts:
+          description: 'Events may assigned to different contexts to determine where they come from.
+            For example a facebook event has the following contexts: `facebook`, `facebook/pages/{pageId}` and `facebook/events/{eventId}`.'
           uniqueItems: true
           type: array
           items:
             type: string
+          example: ["meetup/groups/29602718", "meetup/groups/29002800"]
         google_place_id:
+          description: 'The id of the google place where this event will happen.'
           type: string
+          example: ChIJJ2ItzFUsp0cRvKqs0jA4QyA
         updated_at:
+          description: 'The Timestamp when this event has been updated the last time.'
           type: string
           format: date-time
         deleted_at:
-          type: string
-          format: date-time
-        starts_at:
+          description: 'The Timestamp when this event has been deleted. An (deleted) event will only be returned, if `include.deleted: true` is set.'
           type: string
           format: date-time
     GeoArea:
@@ -88,7 +105,7 @@ components:
         google_place_ids:
           description: 'A comma separated list of ids of google places to restrict search to events from these places only.
             <br/>You can use the google maps api to search for google place ids: 
-            [google place id finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder)'
+            [google place id finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder).'
           type: array
           items:
             type: string
@@ -117,11 +134,12 @@ components:
             type: string
           example: ["meetup/groups/29602718", "meetup/groups/29002800"]
         updated_since:
-          description: 'If set only events will be returned which has been added or 
+          description: 'If set, only events will be returned which has been added or 
             modified since the given timestamp. Can be used for synchronization or fetch scenarios.'
           type: string
           format: date-time
         include:
+          description: 'Adds some additional content to the response (e.g. `places` to include all related places).'
           $ref: '#/components/schemas/DiscoverRequestIncludeType'
         limit:
           description: 'Sets the limit how much events should be returned by the response. 
@@ -130,7 +148,7 @@ components:
           format: int32
           example: 10
         cursor:
-          description: 'Continues a search by an "offset" specified by this cursor. 
+          description: 'Continues a search by an `offset` specified by this cursor. 
             Any event search could return a cursor which represents an offset to paginate to the next events. 
             To use a cursor you have to re-run the request with same parameters again but with the given cursor
             value to retrieve the next events of your search behind the limit.'
@@ -138,28 +156,45 @@ components:
     DiscoverRequestIncludeType:
       type: object
       properties:
+        deleted:
+          description: 'If set to `true`the response will also include events which have been deleted 
+            (since the last update timestamp). This option can be used for synchronization to get information about deleted events.'
+          type: boolean
         places:
-          type: object
+          description: 'If set to `true` the response will also include the field places which holds
+            all places of the fetched events by their id. So you can use one request to fetch events with the places where they take part.'
+          type: boolean
     DiscoverResponse:
       type: object
       properties:
         events:
+          description: 'The found events, ordered by `event.starts_at` timestamp.'
           type: array
           items:
             $ref: '#/components/schemas/Event'
         places:
+          description: 'If `include.places: true` is set, all related places of returned events will be included (by their google place id).'
           type: object
           additionalProperties:
             $ref: '../places/components.yaml#/components/schemas/Place'
-        cursor:
-          type: string
-          example: WzE1NTk2NjU4MDAsImV2ZW50IzUxODQ0OTU2MTk2NzAwMTYiXQ==
-        request:
-          $ref: '#/components/schemas/DiscoverRequest'
-        timestamp:
-          type: string
-          format: date-time
         primary_google_place_ids:
+          description: 'A google place may have multiple place ids, but only one primary. If `google_place_ids` are given by the request,
+            which were not the primary ones, this dictionary holds the related primary google ids (only if they are different). 
+            All places will be returned and linked with their primary google place id.'
           type: object
           additionalProperties:
             type: string
+        cursor:
+          description: 'If given this cursor can be used to retrieve the next bunch of events.
+            This cursor must be added as parameter to same request to get the next events.'
+          type: string
+          example: WzE1NTk2NjU4MDAsImV2ZW50IzUxODQ0OTU2MTk2NzAwMTYiXQ==
+        request:
+          description: 'The original request parameter values, which have been used to perfom this event search.'
+          $ref: '#/components/schemas/DiscoverRequest'
+        timestamp:
+          description: 'The timestamp, when this request has been executed.
+            Can be used to get only event updates on using `updated_since` with this timestamp.'
+          type: string
+          format: date-time
+        
