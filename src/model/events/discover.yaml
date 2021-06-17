@@ -2,7 +2,7 @@ get:
   tags:
   - /events
   operationId: discover-events-get
-  summary: search events
+  summary: "/events"
   description: Use this endpoint to search for events.
     <br /><br />All returned events will be primarily sorted by `event.starts_at` timestamps.
     This is a shortcut for `POST /events` request.
@@ -63,15 +63,15 @@ get:
     required: false
     example: 50.838948,12.912577,50.827132,12.933774
   - name: geo_raster_points
+    in: query
     description: 'Restricts the event search to a geo areas specified by "raster points". 
       A raster point is a latitude/longitude combination of double values rounded off to 1 decimal point 
       (separated by a semicolon). For example the "raster point" `50.8;12.9` restricts events
       to locations within a latitude starting with `50.8` and longitude starting with `12.9`.'
-    in: query
     schema:
       type: string
     required: false
-    example: 50.8,12.9;50.9,12.9
+    example: 50.8;12.9,50.9;12.9
   - name: contexts
     in: query
     description: 'Events may assigned to different contexts to determine where they come from.
@@ -79,9 +79,8 @@ get:
       <br /><br />So you can search for all events related to a context (e.g. all events of a facebook page).'
     schema:
       type: string
-    style: simple
     required: false
-    example: "meetup/groups/29602718,meetup/groups/29002800"
+    example: meetup/groups/29602718
   - name: updated_since
     in: query
     description: 'If set, only events will be returned which has been added or 
@@ -132,7 +131,7 @@ get:
 post:
   tags:
   - /events
-  summary: search events
+  summary: "/events"
   operationId: discover-events-post
   description: Use this endpoint to search for events.<br /><br />All returned
     events will be primarily sorted by `event.starts_at` timestamps.

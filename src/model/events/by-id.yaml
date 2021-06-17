@@ -2,7 +2,7 @@ get:
   tags:
   - /events
   operationId: get-event-by-id
-  summary: get event by id
+  summary: "/events/{id}"
   description: Retrieve an event by id.
   parameters:
   - name: id

@@ -2,7 +2,7 @@ get:
   tags:
   - /places
   operationId: get-place-by-id
-  summary: get place by id
+  summary: "/places/{id}"
   description: Retrieve a place by id.
   parameters:
   - name: id

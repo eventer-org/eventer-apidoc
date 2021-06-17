@@ -2,7 +2,7 @@ get:
   tags:
   - /places
   operationId: discover-places-get
-  summary: search places
+  summary: "/places"
   description: 'Use this endpoint to search for places. This is a shortcut for `POST /places` request'
   parameters:
   - name: google_place_ids
@@ -27,7 +27,7 @@ post:
   tags:
   - /places
   operationId: discover-places-post
-  summary: search places
+  summary: "/places"
   requestBody:
     content:
       application/json; charset="utf-8":
