@@ -1,0 +1,25 @@
+get:
+  tags:
+  - /events
+  operationId: get-event-by-id
+  summary: "/events/{id}"
+  description: Retrieve an event by id.
+  parameters:
+  - name: id
+    in: path
+    description: The id of the event to get.
+    required: true
+    schema:
+      type: integer
+      format: int64
+      example: 6171211574804480
+    example: 6171211574804480
+  responses:
+    200:
+      description: The event.
+      content:
+        application/json:
+          schema:
+            $ref: './components.yaml#/components/schemas/Event'
+    404:
+      description: Event not found.
