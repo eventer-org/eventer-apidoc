@@ -1,8 +1,6 @@
-# The OpenAPI specification for the eventer web API
+# The eventer OpenAPI website
 
-This is the official [OpenAPI](https://spec.openapis.org/oas/v3.0.2) specification for the eventer web API.
+This is the [ReDoc](https://github.com/Rebilly/ReDoc) website project of the eventer OpenAPI specification. You can find the deployed version here: https://apidoc.eventer.app/
 
-You can find the deployed web version [here](https://apidoc.eventer.app/).
-
-### A selection of projects that use this web API
-- [eventer.app](https://eventer.app) is an mobile application using the eventer web API to show you events in Chemnitz (Saxony/Germany)
+- This project is using [ReDoc](https://github.com/Rebilly/ReDoc) to render the eventer OpenAPI model into a website.
+- The eventer OpenAPI specification itself can be found here: [eventer OpenAPI](https://github.com/eventer-org/eventer-openapi).
