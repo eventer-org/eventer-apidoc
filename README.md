@@ -1,9 +1,11 @@
-# The eventer OpenAPI website
+# eventer — API Documentation
 
-This is the [ReDoc](https://github.com/Rebilly/ReDoc) website project of the eventer OpenAPI specification.
+Static site that renders the eventer OpenAPI specification using [Redoc](https://github.com/Redocly/redoc).
 
-You can find the deployed website here: [https://apidoc.eventer.app](https://apidoc.eventer.app/).
+Deployed at [apidoc.eventer.app](https://apidoc.eventer.app/).
 
+## How it works
 
-- This project is using [ReDoc](https://github.com/Rebilly/ReDoc) to render the eventer OpenAPI model into a website.
-- The eventer OpenAPI specification itself can be found here: [eventer OpenAPI](https://github.com/eventer-org/eventer-openapi).
+- The [eventer-openapi](https://github.com/eventer-org/eventer-openapi) repo holds the source spec
+- Its CI bundles the multi-file spec into `dist/openapi.yaml`
+- This site loads the bundled spec at runtime via Redoc (v2.5.2)
