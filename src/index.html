@@ -10,7 +10,7 @@
 
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
       body {
@@ -20,14 +20,13 @@
     </style>
   </head>
   <body>
-    
-    <!-- see: https://github.com/Rebilly/ReDoc#redoc-options-object -->
+
+    <!-- see: https://github.com/Redocly/redoc#redoc-options-object -->
     <redoc
-      hideLoading="true" 
-      sortPropsAlphabetically="true" 
-      spec-url='https://raw.githubusercontent.com/eventer-org/eventer-openapi/main/openapi/openapi.yaml'
-    />
-    </redoc>
-    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"></script>
+      hideLoading="true"
+      sortPropsAlphabetically="true"
+      spec-url='https://raw.githubusercontent.com/eventer-org/eventer-openapi/main/dist/openapi.yaml'
+    ></redoc>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@2.5.2/bundles/redoc.standalone.js"></script>
   </body>
 </html>
